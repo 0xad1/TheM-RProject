@@ -1,0 +1,86 @@
+#The function of smart contracts on the blockchain is very similar to a microservice on the web. 
+#If the public ledger represents the database layer of the blockchain, then smart contracts are where all the business logic that transacts with that data lives.
+#use of modifiers
+pragma solidity 0.5.1;
+
+contract MyContract {
+    uint256 public peopleCount = 0;
+    mapping(uint => Person) public people;
+
+    address owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+
+    struct Person {
+        uint _id;
+        string _firstName;
+        string _lastName;
+    }
+
+    constructor() public {
+        owner = msg.sender;
+    }
+
+    function addPerson(
+        string memory _firstName,
+        string memory _lastName
+    )
+        public
+        onlyOwner
+    {
+        incrementCount()
+        people[peopleCount] = Person(peopleCount, _firstName, _lastName);
+    }
+
+    function incrementCount() internal {
+        peopleCount += 1;
+    }
+}
+
+#use of events
+contract MyContract {
+    mapping(address => uint256) public balances
+
+    event Purchase(
+        address indexed _buyer,
+        uint256 _amount
+    );
+
+    constructor(address payable _wallet) public {
+        wallet = _wallet;
+    }
+
+    function() external payable {
+        buyToken();
+    }
+
+    function buyToken() public payable {
+        balances[msg.sender] += 1;
+        wallet.transfer(msg.value);
+        emit Purchase(msg.sender, 1);
+    }
+}
+
+#use of struct
+struct Person {
+    string _firstName;
+    string _lastName;
+}
+
+#use of constructors
+constructor() public {
+    value = "myValue";
+}
+
+#use of return
+
+function get() {
+    return value;
+    
+#use of returns
+function get() public view returns(string) {
+    return value;
+}
