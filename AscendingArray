@@ -1,0 +1,35 @@
+#include<stdio.h>              
+#include<conio.h>
+
+
+int main()                        
+{
+	int a[200],n,i,j;
+	printf("Array size: ");
+        scanf("%d",&n);
+        printf("Elements: ");
+        
+      for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+	for (int i = 0; i < n; i++)                     //Loop for ascending ordering
+	{
+		for (int j = 0; j < n; j++)             //Loop for comparing other values
+		{
+			if (a[j] > a[i])                //Comparing other array elements
+			{
+				int tmp = a[i];         //Using the temp variable for storing last value
+				a[i] = a[j];            //replacing value
+				a[j] = tmp;             //storing the last value
+			}  
+		}
+	}
+	printf("\n\nAscending : ");                     
+	for (int i = 0; i < n; i++)                     //Final result print
+	{
+		printf(" %d ", a[i]);
+	}
+	return 0;          
+getch();
+}
